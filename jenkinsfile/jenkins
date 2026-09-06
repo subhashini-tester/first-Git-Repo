@@ -1,0 +1,9 @@
+pipeline{
+    agent any
+    stages{
+        stages('Checkout') {steps{checkout scm}}
+        stages('Install Dependencies') {steps{sh 'npm ci'}}
+        stages('Install Playwirght'){steps{sh 'npm playwright install -with-deps'}}
+        stage('Run Tests'){steps{sh 'npx playwright test'}}
+    }
+  }
